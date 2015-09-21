@@ -1,6 +1,6 @@
 {
   "name": "autoextender",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Auto-generated hashed CSS placeholders",
   "main": "index.js",
   "scripts": {
