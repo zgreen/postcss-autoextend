@@ -19,6 +19,6 @@
     "postcss": "^5.0.5",
     "postcss-extend": "^1.0.0",
     "postcss-loader": "^0.6.0",
-    "uniqueid": "^0.1.0"
+    "string-hash": "^1.1.0"
   }
 }

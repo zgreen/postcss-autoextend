@@ -1,34 +1,39 @@
+'use strict';
+
 var postcss       = require('postcss');
-var postCSSExtend = require('postcss-extend');
+var postcssExtend = require('postcss-extend');
 var alphaSort     = require('alpha-sort');
-var uniqueId      = require('uniqueid');
+var stringHash    = require('string-hash');
 
-module.exports = postcss.plugin('postcss-autoextender', function (opts) {
+module.exports = postcss.plugin('postcss-autoextender', function () {
 
-  opts = opts || {};
   return function (css, result) {
+    var placeholders = [];
     css.walkAtRules(function(atRule) {
-      var placeholders = [];
+      var placeholder;
+      var placeholderName;
+      var decls;
       if (atRule.name === 'autoextend') {
-        var decls = [];
+        decls = [];
         atRule.nodes.forEach(function(declaration) {
           decls.push(declaration.toString());
         });
-        decls = decls.sort(alphaSort.asc);
-        var placeholderName = uniqueId({prefix: '_'}, decls);
-        if (-1 === placeholders.indexOf(placeholderName)) {
-          placeholders[placeholderName] = decls.join(';');
+        decls = decls.sort(alphaSort.asc).join(';');
+        placeholderName = '_' + stringHash(decls);
+        if (placeholders[placeholderName] !== decls) {
+          placeholders[placeholderName] = decls;
+          placeholder =
+            '%' +
+            placeholderName +
+            '{' +
+            placeholders[placeholderName] +
+            '}';
+          css.prepend(placeholder);
         }
-        var placeholder =
-          '%' +
-          placeholderName +
-          '{' +
-          placeholders[placeholderName] +
-          '}';
-        css.append(placeholder);
-        atRule.replaceWith('@extend ' + placeholder);
-        postcss([postCSSExtend]).process(css);
+        atRule.replaceWith('@extend %' + placeholderName);
+        postcss([postcssExtend]).process(css);
       }
     });
   }
+  
 });
