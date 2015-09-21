@@ -1,0 +1,24 @@
+{
+  "name": "autoextender",
+  "version": "0.0.1",
+  "description": "Auto-generated hashed CSS placeholders",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "postcss",
+    "placeholder",
+    "extend",
+    "autoextend"
+  ],
+  "author": "Zach Green",
+  "license": "MIT",
+  "devDependencies": {
+    "alpha-sort": "^1.0.2",
+    "postcss": "^5.0.5",
+    "postcss-extend": "^1.0.0",
+    "postcss-loader": "^0.6.0",
+    "uniqueid": "^0.1.0"
+  }
+}
