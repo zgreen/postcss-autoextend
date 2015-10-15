@@ -36,8 +36,7 @@ module.exports = postcss.plugin('postcss-autoextender', () => {
         atRule.replaceWith('@extend %' + placeholderName + ';');
       }
     });
-    var processor = postcss([postcssExtend]);
-    processor.process(css).then( (result) => {
+    postcss([postcssExtend]).process(css).then( (result) => {
       css.append(result);
     });
   }
