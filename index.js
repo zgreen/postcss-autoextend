@@ -5,24 +5,27 @@ var postcssExtend = require('postcss-extend');
 var alphaSort     = require('alpha-sort');
 var stringHash    = require('string-hash');
 
-module.exports = postcss.plugin('postcss-autoextender', function () {
+module.exports = postcss.plugin('postcss-autoextender', () => {
 
-  return function (css, result) {
-    var placeholders = [];
-    css.walkAtRules(function(atRule) {
-      var placeholder;
-      var placeholderName;
-      var decls;
+  return (css, result) => {
+    // Array to hold placeholders
+    const placeholders = [];
+    // Walk @autoextend rules
+    css.walkAtRules( (atRule) => {
       if (atRule.name === 'autoextend') {
-        decls = [];
-        atRule.nodes.forEach(function(declaration) {
+        let decls = [];
+        // Add the nodes to an array
+        atRule.nodes.forEach( (declaration) => {
           decls.push(declaration.toString());
         });
+        // Sort the properties alphabetically
         decls = decls.sort(alphaSort.asc).join(';');
-        placeholderName = '_' + stringHash(decls);
+        // Generate a hashed placeholder name based on the properties
+        let placeholderName = '_' + stringHash(decls);
+        // Check to see if a matching placeholder has already been generated
         if (placeholders[placeholderName] !== decls) {
           placeholders[placeholderName] = decls;
-          placeholder =
+          let placeholder =
             '%' +
             placeholderName +
             '{' +
@@ -30,10 +33,13 @@ module.exports = postcss.plugin('postcss-autoextender', function () {
             '}';
           css.prepend(placeholder);
         }
-        atRule.replaceWith('@extend %' + placeholderName);
-        postcss([postcssExtend]).process(css);
+        atRule.replaceWith('@extend %' + placeholderName + ';');
       }
     });
+    var processor = postcss([postcssExtend]);
+    processor.process(css).then( (result) => {
+      css.append(result);
+    });
   }
-  
+
 });
