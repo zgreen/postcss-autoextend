@@ -1,12 +1,9 @@
 # PostCSS Autoextend
 
-## Use
-
 Use `@autoextend` to automatically extend styles.
 
-Example input:
-
 ```css
+/* Input example */
 .first-test {
   @autoextend {
     float: left;
@@ -49,10 +46,8 @@ Example input:
   }
 }
 ```
-
-Will output:
-
 ```css
+/* Output example */
 .second-test, .second-test-again, .mixed-test {
   color: red;
   font-size: 1em;
