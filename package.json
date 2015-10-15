@@ -1,6 +1,6 @@
 {
-  "name": "autoextender",
-  "version": "0.1.0",
+  "name": "postcss-autoextend",
+  "version": "0.2.0",
   "description": "Auto-generated hashed CSS placeholders",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,6 @@
     "alpha-sort": "^1.0.2",
     "postcss": "^5.0.5",
     "postcss-extend": "^1.0.0",
-    "postcss-loader": "^0.6.0",
     "string-hash": "^1.1.0"
   }
 }
