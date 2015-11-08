@@ -25,12 +25,13 @@ module.exports = postcss.plugin('postcss-autoextender', () => {
         // Check to see if a matching placeholder has already been generated
         if (placeholders[placeholderName] !== decls) {
           placeholders[placeholderName] = decls;
-          let placeholder =
-            '%' +
-            placeholderName +
-            '{' +
-            placeholders[placeholderName] +
-            '}';
+          let placeholder = [
+            '%',
+            placeholderName,
+            '{',
+            placeholders[placeholderName],
+            '}'
+          ].join('');
           css.prepend(placeholder);
         }
         atRule.replaceWith('@extend %' + placeholderName + ';');

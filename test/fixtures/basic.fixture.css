@@ -1,0 +1,15 @@
+.selector-1 {
+	@autoextend {
+		color: red;
+		float: left;
+		width: 100%;
+	}
+}
+
+.selector-2 {
+	@autoextend {
+		color: red;
+		float: left;
+		width: 100%;
+	}
+}
