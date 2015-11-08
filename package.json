@@ -3,12 +3,12 @@
   "version": "0.2.1",
   "description": "Auto-generated hashed CSS placeholders",
   "main": "index.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/zgreen/postcss-autoextend"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zgreen/postcss-autoextend"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape test"
   },
   "keywords": [
     "postcss-plugin",
@@ -23,6 +23,7 @@
     "alpha-sort": "^1.0.2",
     "postcss": "^5.0.5",
     "postcss-extend": "^1.0.0",
-    "string-hash": "^1.1.0"
+    "string-hash": "^1.1.0",
+    "tape": "^4.2.2"
   }
 }
